@@ -6,10 +6,13 @@
 //  Copyright (c) 2014 Alexander Ignition. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AILoginViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : AILoginViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UIButton *authButton;
 
 @end
 
