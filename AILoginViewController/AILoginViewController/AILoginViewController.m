@@ -145,17 +145,6 @@
 
 #pragma mark - Authorization
 
-- (RACSignal *)test
-{
-    return [[[[self authSignal] doNext:^(id x) {
-        //
-    }] doError:^(NSError *error) {
-        //
-    }] doCompleted:^{
-        //
-    }];
-}
-
 - (RACSignal *)authSignal
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {

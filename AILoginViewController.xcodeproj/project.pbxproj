@@ -15,6 +15,7 @@
 		32945BE71A429C7700A0349A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32945BE51A429C7700A0349A /* LaunchScreen.xib */; };
 		32945BF31A429C7800A0349A /* AILoginViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 32945BF21A429C7800A0349A /* AILoginViewControllerTests.m */; };
 		32945BFE1A429E1500A0349A /* AILoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32945BFD1A429E1500A0349A /* AILoginViewController.m */; };
+		32E113A71A42D131004F930E /* AILoginViewController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 32E113A61A42D131004F930E /* AILoginViewController.podspec */; };
 		DA5B3622004AB6997D610087 /* libPods-AILoginViewController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 829F31BB7DF4E29B773FE352 /* libPods-AILoginViewController.a */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		32945BF21A429C7800A0349A /* AILoginViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AILoginViewControllerTests.m; sourceTree = "<group>"; };
 		32945BFC1A429E1500A0349A /* AILoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AILoginViewController.h; path = AILoginViewController/AILoginViewController.h; sourceTree = "<group>"; };
 		32945BFD1A429E1500A0349A /* AILoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AILoginViewController.m; path = AILoginViewController/AILoginViewController.m; sourceTree = "<group>"; };
+		32E113A61A42D131004F930E /* AILoginViewController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AILoginViewController.podspec; sourceTree = "<group>"; };
 		6D6A6CFD7A2E9D5805AE7D2E /* Pods-AILoginViewController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AILoginViewController.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AILoginViewController/Pods-AILoginViewController.debug.xcconfig"; sourceTree = "<group>"; };
 		829F31BB7DF4E29B773FE352 /* libPods-AILoginViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AILoginViewController.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2E1178BD4F86EECB71D9F9B /* Pods-AILoginViewController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AILoginViewController.release.xcconfig"; path = "Pods/Target Support Files/Pods-AILoginViewController/Pods-AILoginViewController.release.xcconfig"; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				32945BD41A429C7700A0349A /* Products */,
 				FEA6B2C04DE6E8D94E422FD8 /* Pods */,
 				D10E9AEC992DD0656BBA610B /* Frameworks */,
+				32E113A61A42D131004F930E /* AILoginViewController.podspec */,
 			);
 			sourceTree = "<group>";
 		};
@@ -241,6 +244,7 @@
 				32945BE21A429C7700A0349A /* Main.storyboard in Resources */,
 				32945BE71A429C7700A0349A /* LaunchScreen.xib in Resources */,
 				32945BE41A429C7700A0349A /* Images.xcassets in Resources */,
+				32E113A71A42D131004F930E /* AILoginViewController.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
