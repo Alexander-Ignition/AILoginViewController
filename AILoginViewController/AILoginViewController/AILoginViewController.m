@@ -11,6 +11,14 @@
 #import <ReactiveCocoa/RACEXTScope.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+
+@interface AILoginViewController ()
+
+@property (strong, nonatomic) RACSubject *textFieldReturnPressed;
+
+@end
+
+
 @implementation AILoginViewController
 
 - (void)viewDidLoad
@@ -18,6 +26,10 @@
     [super viewDidLoad];
     
     @weakify(self)
+    
+    
+    // Valid UITextField
+    
     RACSignal *validUsernameSignal = [self.usernameTextField.rac_textSignal map:^NSNumber *(NSString *text) {
         @strongify(self)
         return @([self isValidUsername:text]);
@@ -36,42 +48,85 @@
         [self textField:self.passwordTextField isValid:passwordValid.boolValue];
     }];
     
+    
+    // Valid UITextField for Auth Button
+    
     NSArray *validTextFieldSignals = @[validUsernameSignal, validPasswordSignal];
     [[RACSignal combineLatest:validTextFieldSignals reduce:^id(NSNumber *usernameValid, NSNumber *passwordValid) {
-        return @([usernameValid boolValue] && [passwordValid boolValue]);
+        
+        return @(usernameValid.boolValue && passwordValid.boolValue);
+        
     }] subscribeNext:^(NSNumber *signupActive) {
+        
         @strongify(self)
-        self.authButton.enabled = [signupActive boolValue];
+        self.authButton.enabled = signupActive.boolValue;
     }];
     
     
-    [[[[self.authButton rac_signalForControlEvents:UIControlEventTouchUpInside] doNext:^(id x) {
+    // Auth Command
+    
+    RACCommand *authCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(UIButton *authButton) {
         
         @strongify(self)
         self.authButton.enabled = NO;
         [self startAuthSignal];
         
-    }] flattenMap:^RACSignal *(id value) {
-        
-        @strongify(self)
-        return [self authSignal];
-        
-    }] subscribeNext:^(NSNumber *signedIn) {
-        
-        @strongify(self)
-        [self successAuthSignal:nil];
-        
-    } error:^(NSError *error) {
-        
-        @strongify(self)
-        [self failureAuthSignal:nil];
-        
-    } completed:^{
-        
-        @strongify(self)
-        self.authButton.enabled = YES;
-        [self stopAuthSignal];
+        return [[[[self authSignal] doNext:^(id x) {
+            
+            @strongify(self)
+            [self successAuthSignal:x];
+            
+        }] doError:^(NSError *error) {
+            
+            @strongify(self)
+            [self failureAuthSignal:error];
+            
+        }] doCompleted:^{
+            
+            @strongify(self)
+            self.authButton.enabled = YES;
+            [self stopAuthSignal];
+        }];
     }];
+    
+    
+    // Auth Button Action
+    
+    [[self.authButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(UIButton *sender) {
+        [authCommand execute:sender];
+    }];
+    
+    
+    // UITextField
+    
+    self.textFieldReturnPressed = [RACSubject subject];
+    
+    [self.textFieldReturnPressed subscribeNext:^(UITextField *textField) {
+        
+        @strongify(self)
+        
+        UITextField *username = self.usernameTextField;
+        UITextField *password = self.passwordTextField;
+        
+        if ([textField isEqual:username]) {
+            [password becomeFirstResponder];
+            
+        } else if ([textField isEqual:password]) {
+            [password resignFirstResponder];
+            
+            UIButton *authButton = self.authButton;
+            if (authButton.enabled == YES) {
+                [authCommand execute:authButton];
+            }
+        }
+    }];
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.textFieldReturnPressed sendNext:textField];
+    return YES;
 }
 
 #pragma mark - Validation
@@ -90,6 +145,17 @@
 
 #pragma mark - Authorization
 
+- (RACSignal *)test
+{
+    return [[[[self authSignal] doNext:^(id x) {
+        //
+    }] doError:^(NSError *error) {
+        //
+    }] doCompleted:^{
+        //
+    }];
+}
+
 - (RACSignal *)authSignal
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
@@ -101,8 +167,8 @@
     }];
 }
 
-- (void)signInWithUsername:(NSString *)username password:(NSString *)password complete:(void(^)(BOOL))completeBlock {
-    
+- (void)signInWithUsername:(NSString *)username password:(NSString *)password complete:(void(^)(BOOL))completeBlock
+{
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {

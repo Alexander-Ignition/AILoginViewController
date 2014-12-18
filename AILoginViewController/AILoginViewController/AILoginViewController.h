@@ -10,7 +10,7 @@
 
 @class RACSignal;
 
-@interface AILoginViewController : UIViewController
+@interface AILoginViewController : UIViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;

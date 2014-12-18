@@ -10,9 +10,5 @@
 
 @interface ViewController : AILoginViewController
 
-@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UIButton *authButton;
-
 @end
 
