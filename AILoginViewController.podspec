@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.author       = { "GRADUATION" => "izh.sever@gmail.com" }
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/Alexander-Ignition/AILoginViewController.git", :tag => s.version.to_s }
-  s.source_files = "AILoginViewController/*.{h,m}"
+  s.source_files = "AILoginViewController/AILoginViewController/*.{h,m}"
   s.requires_arc = true
 
   s.dependency "ReactiveCocoa", "~> 2.0"
