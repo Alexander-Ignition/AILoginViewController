@@ -25,6 +25,9 @@
 {
     [super viewDidLoad];
     
+    self.usernameTextField.delegate = self;
+    self.passwordTextField.delegate = self;
+    
     @weakify(self)
     
     
@@ -180,6 +183,12 @@
 
 - (void)failureAuthSignal:(NSError *)error {
     NSLog(@"%s error = %@", __PRETTY_FUNCTION__, error);
+}
+
+#pragma mark - Actions
+
+- (IBAction)cancelAction:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -29,4 +29,6 @@
 - (void)successAuthSignal:(id)object;
 - (void)failureAuthSignal:(NSError *)error;
 
+- (IBAction)cancelAction:(id)sender;
+
 @end
